@@ -1,0 +1,153 @@
+ <!-- Core Javascript -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <!--<script src="https://cdn.jsdelivr.net/materialize/0.98.0/js/materialize.min.js"></script>-->
+    <script src="{{ "/assets/js/gallery.min.js" | prepend: site.baseurl }}"></script>
+    <script>
+
+        $(document).ready(function(){
+            $(".preloader").fadeOut(3000);
+            $('.tap-target').tapTarget('open');
+        });
+
+     var videoPlaylist = [
+      {
+        position: "0",
+        title: "Binaural Rain Sounds For Sleep and Study in Quarantine.",
+        videoId: "APD0mMWL3x4"
+      },{
+        position: "1",
+        title: "Walking in the Rain Tokyo, Japan ",
+        videoId: "Et7O5-CzJZg"
+      },{
+        position: "2",
+        title: "Rain & Thunder Sounds in the Foggy Forest.",
+        videoId: "nRBCFsU_KDc"
+      },{
+        position: "3",
+        title: "Backstreets of Japan at night",
+        videoId: "Hndf5JRwUL0"
+      },{
+        position: "4",
+        title: "Walking in the Rain in Amsterdam.",
+        videoId: "N0af7_w5GBQ"
+      },{
+        position: "5",
+        title: "Walking in Heavy Rainstorm in NYC",
+        videoId: "uMnGzVPUEB4"
+      },{
+        position: "6",
+        title: "Relaxing Walk in the Rain, Umbrella and Nature",
+        videoId: "ynLpZGegiJE"
+
+      },{
+        position: "7",
+        title: "Driving in the Rain Seoul to Daegu, Korea",
+        videoId: "Dwswey-GqQc"
+
+      }];
+
+
+      let rainPlay = 0;
+      var tag = document.createElement('script');
+
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      var player;
+      var offsetHeight = document.getElementById('bg-container').offsetHeight;
+      var offsetWidth = document.getElementById('bg-container').offsetWidth;
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+
+          height: '1024',
+          width: '1024',
+          videoId: 'APD0mMWL3x4',
+          playerVars: {
+            'autoplay': 0,
+            'controls': 0,
+            'showinfo': 0,
+            'modestbranding': 0,
+            'loop': 1,
+            'fs': 0,
+            'cc_load_policty': 0,
+            'iv_load_policy': 3
+          },
+          events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+          }
+        });
+      }
+
+
+      function onPlayerReady(event) {
+        /*event.target.playVideo();*/
+
+      }
+
+      function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.ENDED) {
+          setTimeout(player.playVideo(),3000);
+
+        }
+      }
+
+      function playVid() {
+        if(player.getPlayerState() == 1){
+          /*isPlaying*/
+          player.stopVideo();
+          $('#vid_control').html('<i class="material-icons large">play_arrow</i>');
+          $('.bg-image').removeAttr("style");
+          $('.video-background').attr("style", "display: none;");
+        }else{
+          player.playVideo();
+          $('#vid_control').html('<i class="material-icons large">stop</i>');
+          $('.bg-image').attr("style", "display: none;");
+          $('.video-background').removeAttr("style");
+        }
+      }
+
+      function nextVideo(){
+        player.stopVideo();
+        if(rainPlay < videoPlaylist.length-1){
+          rainPlay = rainPlay+1;
+        }else{
+          rainPlay = 0;
+        }
+        player.loadVideoById(videoPlaylist[rainPlay].videoId);
+        player.playVideo();
+        player.seekTo(5);
+      }
+
+      function prevVideo(){
+        if(rainPlay > 0){
+          rainPlay = rainPlay-1;
+        }else{
+          rainPlay = videoPlaylist.length-1;
+        }
+
+        player.stopVideo();
+        player.loadVideoById(videoPlaylist[rainPlay].videoId);
+        player.seekTo(5);
+      }
+
+      function setVolume(change){
+        var curr_volume = player.getVolume();
+        if(change == 'up'){
+            curr_volume = curr_volume + 10;
+            player.setVolume(curr_volume);
+        }
+        else if(change == 'down'){
+            curr_volume = curr_volume - 10;
+            player.setVolume(curr_volume);
+            //player.setVolume(volume);
+        }
+      }
+
+    </script>
+  </body>
+</html>

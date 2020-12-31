@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Gallery Photo</title>
+
+    <!-- Lato Font -->
+    <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+
+    <!-- Stylesheet-->
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css' rel='stylesheet' type='text/css'>
+    <link href="{{ "/assets/css/gallery.css" | prepend: site.baseurl }}" rel="stylesheet">
+
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+.font-style {
+    font-family: 'Caveat', cursive;
+    text-shadow: 0px 0px 15px rgba(0,0,0,0.55);
+}
+
+.gallery-item.active .gallery-overlay {
+    display: none;
+}
+.gallery-overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: background-color 0.2s, opacity 0.2s;
+}
+.gallery-overlay:hover {
+    background-color: rgba(0, 0, 0, 0.4);
+    opacity: 1;
+}
+.gallery-overlay:hover .overlay-header {
+    transform: scale(1);
+}
+.gallery-overlay .overlay-header {
+    font-size: 36px;
+    text-align: center;
+    color: #fff;
+    transform: scale(0.5);
+    transition: transform 0.2s;
+}
+.gallery-overlay .overlay-header .price,
+.gallery-overlay .overlay-header .spr-badge {
+    font-size: 14px;
+    display: block;
+}
+.gallery-overlay .overlay-header .spr-badge {
+    margin-top: 5px;
+}
+body:not(.gallery-dark-theme) .col .gallery-overlay {
+    left: 0rem;
+    right: 0rem;
+}
+
+  .video-background {
+  background: #000;
+  top: 0; right: 0; bottom: 0; left: 0;
+  z-index: -99;
+}
+.video-foreground,
+.video-background iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+@media (min-aspect-ratio: 16/9) {
+  .video-foreground { height: 300%; top: -100%; }
+}
+@media (max-aspect-ratio: 16/9) {
+  .video-foreground { width: 300%; left: -100%; }
+}
+    .bg-image{
+        background-color: black;
+        background: url('https://i.postimg.cc/3JDfp0Mq/cover.jpg');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style>
+<style type="text/css">
+    .preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 9999;
+      background-color: #000;
+    }
+    .preloader .loading {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%);
+      font: 14px arial;
+    }
+</style>
