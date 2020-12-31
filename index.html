@@ -9,7 +9,7 @@ title: "Gallery Photo"
     {% for post in site.posts %}
         <div class="col l4 m6 s12 gallery-item gallery-expand ce {{ post.categories }}">
             <div class="gallery-curve-wrapper">
-                <a class="gallery-cover gray">
+                <a class="gallery-cover gray" id="{{ post.slug }}">
                     <img class="responsive-img" src="{{ post.image }}" alt="placeholder" crossorigin="anonymous" />
                 </a>
                 <div class="gallery-overlay">

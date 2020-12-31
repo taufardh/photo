@@ -10,6 +10,13 @@
         $(document).ready(function(){
             $(".preloader").fadeOut(3000);
             $('.tap-target').tapTarget('open');
+
+            if (window.location.hash){
+              var hash = window.location.hash.substring(2);
+              if (hash){
+                $('#'+hash+'').trigger("click");
+              }
+            }
         });
 
      var videoPlaylist = [
