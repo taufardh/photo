@@ -13,7 +13,10 @@
 
             if (window.location.hash){
               var hash = window.location.hash.substring(1);
+              var n = str.search("#");
+              var subhash = window.location.hash.substring(n);
               console.log(hash);
+              console.log(subhash);
               // if (hash){
               //   $('#'+hash+'').trigger("click");
               // }
