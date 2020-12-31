@@ -17,9 +17,12 @@
               var subhash = window.location.hash.substring(n+2);
               console.log(hash);
               console.log(subhash);
-              // if (hash){
-              //   $('#'+hash+'').trigger("click");
-              // }
+              if (hash == subhash){
+                $('#'+hash+'').trigger("click");
+              }
+              else{
+                $('#'+subhash+'').trigger("click");
+              }
             }
         });
 
